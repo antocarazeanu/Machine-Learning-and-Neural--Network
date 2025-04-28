@@ -1,0 +1,88 @@
+Tema 1 Metoda Numerice
+Carazeanu Antonio-Christian, 312CC
+
+Testul 1 de la functia de predict, problema 3, este ok pe local dar pe
+VMChecker apare WA.
+
+
+/* Markov is coming */
+    Funcția parse_labyrinth este pentru citirea dimensiunilor matricei, iar
+apoi matricea în sine din fișier. Funcția get_adjacency_matrix parcurge matricea
+citită anterior și transformă în biți numerele din matrice apoi verifică cone-
+xiunea cu vecinii pentru a putea crea matricea de adiacență pentru graful
+Markov. Următoarea funcție, get_link_matrix, are un procedeu asemănător cu cea
+anterioară parcurgând matricea citită și transformând numerele în biți pentru a
+verifica conexiunea dintre nodurile vecine, dar creează matricea de conexiuni
+dintre nodurile grafului Markov. Funcția get_Jacobi_parameters primește ca
+argument o matrice Link și extrage două matrice, G și c, necesare pentru a aplica
+metoda Jacobi de rezolvare a sistemului de ecuații liniare. G este matricea Link
+fără ultimele două coloane și ultimele două rânduri; c este ultima coloană a
+matricei Link, fără ultimele două elemente. Funcția calculează apoi inversa
+matricei diagonale D a matricei G și matricea Gj și vectorul cj necesare pentru a
+aplica metoda Jacobi de rezolvare a sistemului de ecuații liniare. Funcția
+perform_iterative aplică iterația Jacobi și returnează soluția aproximată x a
+sistemului, dar și eroarea și numărul de pași. Funcția heuristic_greedy are ca
+scop găsirea drumului spre câștig respectând următorul algoritm: Algoritmul
+funcționează prin construirea treptată a unui drum de la poziția de pornire către
+starea câștigătoare, adăugând în mod repetat vecinul nevizitat cu cea mai mare
+probabilitate de a ajunge la starea câștigătoare la sfârșitul drumului. Matricea
+de adiacență este folosită pentru a determina vecinii fiecărei poziții, iar vectorul
+de probabilități este folosit pentru a evalua probabilitatea de a ajunge la starea
+câștigătoare de la fiecare vecin. Dacă nu există niciun vecin nevizitat cu o
+probabilitate pozitivă de a ajunge la starea câștigătoare, poziția curentă este
+eliminată din drum. Dacă nu se poate găsi un drum către starea câștigătoare,
+funcția returnează o matrice goală. Ultima funcție, decode_path, parcurge vectorul
+path și transformă fiecare element din acesta în perechea de indici corespunzători.
+
+
+/* Linear regression */
+    Funcția parse_data_set este pentru citirea dimensiunilor matricei, iar apoi
+se citesc elementele din matricea mare din fișier, iar în Y se stochează prima
+coloană din aceasta și restul în matricea inițială. Același lucru îl face și
+funcția parse_csv_data, doar că aceasta aplică citirea specifică fișierelor tip
+CSV. Funcția prepare_for_regression transformă matricea inițială în matricea de
+caracteristici, transformând string-urile "yes" în 1, "no" în 0, iar "furnished",
+"unfurnished" și "semi-furnished" le transformă în 2 coloane de 0 și 1 în funcție
+de cuvânt. Următoarea funcție, linear_regression_cost, calculează funcția h pe
+fiecare linie a matricii de caracteristici și aplică formula din cerință pentru
+a calcula funcția de cost, așa cum a fost stabilit în cerință, folosind aceeași
+formule. Funcția gradient_descent efectuează minimizări pe funcția de cost și
+creează vectorul ce conține theta, de asemenea folosind tehnica gradientului
+descendent. Funcția normal_equation calculează vectorul de ponderi (Theta)
+folosind ecuația normală și apoi îl îmbunătățește dacă matricea de caracteri-
+stici este pozitiv definită, folosind metoda gradientului conjugat. Ultimele 2
+funcții sunt asemănătoare, deoarece ambele calculează funcția h pe fiecare
+linie a matricii, apoi vectorul de erori care este ridicat la pătrat, apoi,
+prima funcție lasso_regression_cost calculează norma L1, în schimb ridge_re-
+gression_cost calculează termenul specific L2, iar în final funcțiile aplică
+formula specifică de calculare a costului.
+
+
+/* MNIST 101 */
+    Funcția load_dataset prei datele din fisier și ștochează în X matricea de
+caracteristici și în y etichetele. Funcția split_dataset imparte matricea X și
+etichetele y primite în date de antrenament și de test în funcție de procentajul
+primit. Funcția de initialize_weights dă valori din intervalul [-E,E] greutati-
+lor cu ajutorul formulei din cerintă, și returnează matricea greutatilor.
+Funcția de cost implementează algoritmul de propagare înăinte și înăpoi și
+calculează funcția de cost și gradientul în reteauă neuronală cu două straturi
+(o reteauă neuronală cu un strat ascuns). Theta1 și Theta2 sunt matricile de pon-
+deri pentru stratul ascuns și stratul de ieșire, iar X și y reprezintă datele
+de antrenare și etichetele corespunzătoare. Funcția de cost este calculată
+utilizand̦ funcția de pierdere a entropiei încrucisate regulate, iar gradientul
+este calculat utilizand̦ algoritmul de propagare înăpoi. Lambda este un parametru
+de regularizare care ajută la prevenirea supravaluării (overfitting). Ultima
+funcție, predict_classes, transformă parametrii modelului în matricele de pon-
+deri ale fiecărui strat, apoi adaugă o coloană de 1 la setul de date de testare
+pentru a se asigura că se ia în considerare bias-ul în predicție. Se calculează
+apoi valorile din primul strat ascuns, adaugă o coloană de 1 la acest strat
+ascuns pentru a lua în considerare bias-ul, și calculează valorile din stratul
+de ieșire. În cele din urmă, funcția determină clasa prezisă pentru fiecare
+exemplu din setul de date de testare pe baza valorilor din stratul de ieșire și
+returnează aceste clase prezise.
+
+
+Surse de inspiratie:
+- Laboratoare Moodle;
+- MathWorks;
+- Stack Overflow;
